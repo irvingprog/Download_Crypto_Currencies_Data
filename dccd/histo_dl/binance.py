@@ -122,7 +122,7 @@ class FromBinance(ImportDataCryptoCurrencies):
         } for e in text]
         
         print('len', len(data))
-        for i, obs in data:
+        for i, obs in enumerate(data):
           if i == 0:
               if data['date'] != self.start:
                   data = [data[0]] + data
