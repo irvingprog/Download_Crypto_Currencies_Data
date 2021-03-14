@@ -108,7 +108,6 @@ class FromBinance(ImportDataCryptoCurrencies):
             'endTime': self.end * 1000,
             'interval': binance_interval(self.span),
         }
-        print('param', param)
         r = requests.get('https://api.binance.com/api/v1/klines', param)
         text = json.loads(r.text)
 
@@ -121,7 +120,14 @@ class FromBinance(ImportDataCryptoCurrencies):
             'volume': float(e[5]),
             'quoteVolume': float(e[7])
         } for e in text]
-
+         
+        for i, obs in data:
+          if i == 0:
+              if data['date'] != self.start:
+                  data = [data[0]] + data
+          else:
+              if obs['date'] - data[i - 1]['date'] > self.span:
+                  data = data[:i] + [obs] + data[i:]
         return data
 
     def import_data(self, start='last', end='now'):
