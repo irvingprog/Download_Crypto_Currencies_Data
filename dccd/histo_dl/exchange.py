@@ -231,7 +231,7 @@ class ImportDataCryptoCurrencies:
         """
         df = pd.DataFrame(
             data,
-            index=range((self.end - self.start) // self.span + 1),
+            #index=range((self.end - self.start) // self.span + 1),
             # index=range(self.start, self.end, self.span)
         ).rename(columns={'date': 'TS'})
         TS = pd.DataFrame(
@@ -243,6 +243,7 @@ class ImportDataCryptoCurrencies:
               .reset_index(drop=True)
               .fillna(method='pad'))
         df = df.assign(Date=pd.to_datetime(df.TS, unit='s'))
+        df.set_index('Date')
         self.df = df.assign(date=df.Date.dt.date, time=df.Date.dt.time)
         return self
 
