@@ -120,7 +120,8 @@ class FromBinance(ImportDataCryptoCurrencies):
             'volume': float(e[5]),
             'quoteVolume': float(e[7])
         } for e in text]
-         
+        
+        print('len', len(data))
         for i, obs in data:
           if i == 0:
               if data['date'] != self.start:
