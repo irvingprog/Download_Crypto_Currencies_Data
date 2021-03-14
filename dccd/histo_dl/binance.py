@@ -127,6 +127,7 @@ class FromBinance(ImportDataCryptoCurrencies):
                   data = [data[0]] + data
           else:
               if obs['date'] - data[i - 1]['date'] > self.span:
+                  print(obs['date'], data[i - 1]['date'])
                   data = data[:i] + [obs] + data[i:]
         return data
 
