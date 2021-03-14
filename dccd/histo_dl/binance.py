@@ -124,7 +124,7 @@ class FromBinance(ImportDataCryptoCurrencies):
         print('len', len(data))
         for i, obs in enumerate(data):
           if i == 0:
-              if data['date'] != self.start:
+              if obs['date'] != self.start:
                   data = [data[0]] + data
           else:
               if obs['date'] - data[i - 1]['date'] > self.span:
