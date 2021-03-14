@@ -108,7 +108,7 @@ class FromBinance(ImportDataCryptoCurrencies):
             'endTime': self.end * 1000,
             'interval': binance_interval(self.span),
         }
-
+        print('param', param)
         r = requests.get('https://api.binance.com/api/v1/klines', param)
         text = json.loads(r.text)
 
